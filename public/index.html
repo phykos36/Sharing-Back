@@ -13,12 +13,11 @@
 <script>
 $(function(){
     $('#gonode').click(function(){
-        alert('');
         $.ajax({
             async: false,
             url: 'http://localhost:8124',
             type: 'POST',
-            data:{"name": "musa"},
+            data:{"username": "Hanako"},
             dataType: 'json'
                 }).done(function(res){
                  console.log(res);
