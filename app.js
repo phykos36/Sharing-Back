@@ -19,15 +19,14 @@ app.use(function(req, res, next){
 })
 app.post('/',function(req, res){
   var obj = {}; 
-  var queryname = "\"" + JSON.stringify(req.body.username) + "\"";
+  var queryname = JSON.stringify(req.body.username);
   console.log('username: ' + queryname);
-  var rejson;
   connection.query("SELECT * FROM Person WHERE name = \"Hanako\"",[queryname],
   function(error, results, fields){
-    console.log(results);
-    rejson = results;
+    console.log(JSON.stringify(results[0]));
+    var rejson = JSON.parse(JSON.stringify(results[0]));
+    res.send(rejson);
   });
-  res.send(rejson);
 });
 
 app.listen(port, () => console.log('listening on port %d', port));
