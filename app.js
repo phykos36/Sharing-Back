@@ -21,9 +21,13 @@ app.post('/',function(req, res){
   var obj = {}; 
   var queryname = JSON.stringify(req.body.username);
   console.log('username: ' + queryname);
-  connection.query("SELECT * FROM Person WHERE name = \"Hanako\"",[queryname],
+  connection.query("SELECT * FROM Person WHERE name = ?",queryname,
   function(error, results, fields){
-    console.log(JSON.stringify(results[0]));
+    if(error){
+      console.log("sql execute error");
+    }else{
+      console.log(JSON.stringify(results[0]));
+    }
     var rejson = JSON.parse(JSON.stringify(results[0]));
     res.send(rejson);
   });
