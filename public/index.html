@@ -1,32 +1,54 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js" 
-     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js" 
+   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-    <title>sample</title>
+  <title>sample</title>
 </head>
 <body>
 <input type="button" id="gonode" value="通信">
+<br>
+<form>
+  <input id="inputform" type="text">
+  <input type="button" id="gonode2" value="取得">
+</form>
 
 <script>
-$(function(){
-    $('#gonode').click(function(){
-        $.ajax({
-            async: false,
-            url: 'http://localhost:8124',
-            type: 'POST',
-            data:{"username": "Hanako"},
-            dataType: 'json'
-                }).done(function(res){
-                 console.log(res);
-                }).fail(function(xhr, status, error){
-                   alert(status);
-                });
+  $(function () {
+    $('#gonode').click(function () {
+      $.ajax({
+        async: false,
+        url: 'http://localhost:8124',
+        type: 'POST',
+        data: { "username": "Hanako" },
+        dataType: 'json'
+      }).done(function (res) {
+        console.log(res);
+      }).fail(function (xhr, status, error) {
+        alert(status);
+      });
 
     });
-});                
+  });
+  $(function () {
+    $('#gonode2').click(function () {
+      console.log('pushed');
+      const inputname = $('#inputform').val();
+      $.ajax({
+        async: false,
+        url: 'http://localhost:8124',
+        type: 'POST',
+        data: { "username": inputname },
+        dataType: 'json'
+      }).done(function (res) {
+        console.log(res);
+      }).fail(function (xhr, status, error) {
+        alert(status);
+      });
+    });
+  });   
 </script>
 </body>
 </html>
